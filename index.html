@@ -742,7 +742,7 @@
                 4. After payment, we book your table
             </div>
             
-            <form id="bookingForm">
+            <form id="bookingForm" action="https://formspree.io/f/mldpbybn" method="POST">
                 <div class="form-group">
                     <label>Full Name (as on passport) <span class="required">*</span></label>
                     <input type="text" name="name" required placeholder="John Smith">
@@ -882,22 +882,13 @@
         
         // Form submission
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Collect form data
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData);
-            
-            // Validate serious intent
-            if (!confirm('Are you 100% certain about this booking?\n\nOnce confirmed, there are NO refunds or cancellations.\n\nClick OK only if you are absolutely sure.')) {
-                return;
-            }
-            
-            // Show success message
-            alert('Thank you for your booking request!\n\nWe will review your request and contact you within 12 hours.\n\nIf your booking is feasible, we will send you a PayPal payment link for $20.\n\nPlease check your email!');
-            
-            // Reset form
-            e.target.reset();
+    // Validate serious intent
+    if (!confirm('Are you 100% certain about this booking?\n\nOnce confirmed, there are NO refunds or cancellations.\n\nClick OK only if you are absolutely sure.')) {
+        e.preventDefault();
+        return;
+    }
+    // フォームは自動的にFormspreeに送信される
+});
             
             // Here you would redirect to PayPal
             // window.location.href = 'https://paypal.me/japaneats/20';
